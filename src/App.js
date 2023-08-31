@@ -1,25 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import React,{createContext,useState} from "react";
+import Child from "./Child"
+import "./style.css";
 
+export const UserContext = createContext();
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+  const [val,updateVal]=useState(0)
+  return(
+    <div className="container">
+    <div className="parent">
+      <h1>Parent</h1>
+      <p>{val}</p>
+      <button onClick={()=>updateVal(val+1)}>+</button>
     </div>
-  );
+    <UserContext.Provider value={val}>
+        <Child/>
+    </UserContext.Provider>
+    </div>
+  )
 }
 
 export default App;
